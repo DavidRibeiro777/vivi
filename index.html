@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>David ❤️ Maria Vitória</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+    .romantic-font { font-family: 'Great Vibes', cursive; }
+
+    body {
+      background: linear-gradient(to bottom right, #ffe4e6, #fbcfe8);
+      overflow-x: hidden;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      color: #f472b6;
+      animation: float 10s linear infinite;
+      font-size: 1.5rem;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 1; }
+    }
+      @keyframes floatUp {
+    0% {
+      transform: translate(0, 100vh) scale(0.6);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(0, -10vh) scale(1.3);
+      opacity: 0;
+    }
+  }
+
+  /* Oscilação horizontal suave */
+  @keyframes sway {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(15px);
+    }
+  }
+
+  /* Combina floatUp + sway usando animação composta com delay e duração diferentes */
+  .heart1 {
+    left: 10%;
+    animation-name: floatUp, sway;
+    animation-duration: 12s, 4s;
+    animation-delay: 0s, 0s;
+  }
+
+  .heart2 {
+    left: 25%;
+    font-size: 1.8rem;
+    animation-name: floatUp, sway;
+    animation-duration: 14s, 5s;
+    animation-delay: 3s, 1s;
+  }
+
+  .heart3 {
+    left: 45%;
+    font-size: 2.2rem;
+    animation-name: floatUp, sway;
+    animation-duration: 11s, 3.5s;
+    animation-delay: 1s, 0.5s;
+  }
+
+  .heart4 {
+    left: 65%;
+    font-size: 1.6rem;
+    animation-name: floatUp, sway;
+    animation-duration: 13s, 4.5s;
+    animation-delay: 5s, 2s;
+  }
+
+  .heart5 {
+    left: 80%;
+    font-size: 1.9rem;
+    animation-name: floatUp, sway;
+    animation-duration: 15s, 6s;
+    animation-delay: 2s, 3s;
+  }
+
+    /* Botão carta */
+    #letterBtn {
+      background: #fbcfe8;
+      color: #9d174d;
+      max-width: 320px;
+      margin: 2rem auto 0;
+      padding: 1.5rem 2rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(244, 114, 182, 0.5);
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s ease;
+    }
+    #letterBtn:hover {
+      transform: scale(1.05);
+    }
+    #letterBtn:active {
+      transform: scale(0.95);
+    }
+
+/* Carta conteúdo - agora fonte legível (sans-serif) */
+#letterContent {
+  max-width: 320px;
+  margin: 1rem auto 0;
+  padding: 1.5rem 2rem;
+  background: #fde4ed;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(220, 38, 97, 0.3);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
+  color: #831843;
+  line-height: 1.6;
+  user-select: text;
+  white-space: pre-line;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, max-height 0.6s ease;
+  text-align: left;
+}
+
+#letterContent.show {
+  opacity: 1;
+  max-height: 2000px; /* ajuste conforme necessidade */
+  overflow: visible;
+}
+
+
+    /* Carrossel */
+    #carousel {
+      scroll-behavior: smooth;
+    }
+    .dot.active {
+      background-color: #9d174d;
+      width: 12px;
+      height: 12px;
+    }
+      .dot.active {
+    width: 12px !important;
+    height: 12px !important;
+    background-color: #db2777 !important; /* pink-600 */
+    box-shadow: 0 0 6px #db2777;
+  }
+  .letter {
+  background: 
+    /* Simular textura de papel com um gradiente sutil */
+    linear-gradient(135deg, #fef2f2 25%, #fde4ed 100%);
+  border-radius: 2rem;
+  padding: 2rem 3rem;
+  box-shadow:
+    0 10px 30px rgba(220, 38, 97, 0.25),
+    inset 0 0 30px #f9d4df;
+  font-family: "Georgia", serif;
+  font-size: 1.125rem;
+  color: #831843;
+  line-height: 1.7;
+  position: relative;
+  border: 1.5px solid #f5a4b4;
+
+  /* Pequeno efeito de vinco ou dobra na borda */
+  box-shadow:
+    0 8px 20px rgba(220, 38, 97, 0.2),
+    inset 0 0 20px #f9d4df,
+    inset 2px 2px 5px rgba(255, 255, 255, 0.7);
+}
+
+/* Opcional: um selo ou fita no canto para "fechar a carta" */
+.letter::before {
+  content: "";
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle at center, #e3342f 40%, transparent 70%);
+  border-radius: 50%;
+  box-shadow: 0 0 8px #e3342f88;
+  filter: drop-shadow(0 0 2px #b02222);
+}
+
+/* Personalize o último parágrafo (assinatura) */
+.letter p:last-child {
+  font-family: "Brush Script MT", cursive, serif;
+  font-size: 1.3rem;
+  color: #9d2a4f;
+  margin-top: 2rem;
+  text-align: right;
+}
+
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 text-center relative">
+
+<div class="hearts">
+  <div class="heart" style="left: 10%; animation-duration: 12s; animation-delay: 0s; font-size: 2rem;">❤️</div>
+  <div class="heart" style="left: 25%; animation-duration: 10s; animation-delay: 3s; font-size: 1.8rem;">💖</div>
+  <div class="heart" style="left: 45%; animation-duration: 14s; animation-delay: 1s; font-size: 2.2rem;">💘</div>
+  <div class="heart" style="left: 65%; animation-duration: 11s; animation-delay: 5s; font-size: 1.6rem;">💕</div>
+  <div class="heart" style="left: 80%; animation-duration: 13s; animation-delay: 2s; font-size: 1.9rem;">❤️</div>
+</div>
+<div class="relative bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl px-10 py-16 max-w-4xl mx-auto text-center ring-2 ring-pink-200 border border-pink-300 overflow-hidden transition-all duration-500">
+
+  <!-- Corações decorativos em camadas -->
+  <div class="absolute -top-12 -left-12 w-36 h-36 bg-pink-100 opacity-40 rounded-full blur-2xl animate-ping"></div>
+  <div class="absolute -bottom-14 -right-14 w-44 h-44 bg-pink-200 opacity-30 rounded-full blur-2xl animate-pulse"></div>
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-50 opacity-20 rounded-full blur-3xl"></div>
+
+  <!-- Ícone decorativo estilizado no topo -->
+<div class="mb-8 flex justify-center">
+  <div class="w-16 h-16 rounded-full border-4 border-pink-300 bg-pink-50 flex items-center justify-center shadow-md animate-pulse">
+    <span class="text-2xl text-pink-500">💗</span>
+  </div>
+</div>
+
+  <!-- Nome do casal com fonte romântica -->
+  <h1 class="text-6xl sm:text-7xl font-serif text-pink-600 drop-shadow-lg animate-pulse tracking-wider" style="font-family: 'Great Vibes', cursive;">
+    David & Maria Vitória
+  </h1>
+<!-- Frase complementar estilizada e profissional -->
+<div class="mt-8 flex justify-center items-center relative">
+  <div class="absolute -left-6 w-6 h-6 bg-pink-100 rounded-full blur-sm animate-pulse"></div>
+  <div class="absolute -right-6 w-6 h-6 bg-pink-100 rounded-full blur-sm animate-pulse"></div>
+  
+  <p class="relative inline-flex items-center gap-2 bg-gradient-to-r from-pink-100/70 to-pink-50 backdrop-blur-sm px-6 py-2 rounded-full shadow-md ring-1 ring-pink-200/70 text-pink-700 text-sm sm:text-base font-semibold tracking-widest uppercase select-none">
+    <svg class="w-5 h-5 text-pink-400 animate-ping-slow" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 
+        5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 
+        4.5 2.09C13.09 3.81 14.76 3 16.5 
+        3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 
+        6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+    Unidos desde <span class="font-bold text-pink-800">15 de Julho de 2023</span>
+    <svg class="w-5 h-5 text-pink-400 animate-ping-slow rotate-180" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 
+        5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 
+        4.5 2.09C13.09 3.81 14.76 3 16.5 
+        3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 
+        6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+  </p>
+</div>
+
+
+<div id="contador" class="mt-10 max-w-xl mx-auto p-8 rounded-3xl bg-gradient-to-br from-pink-200 via-pink-100 to-pink-50 border border-pink-300 shadow-lg text-pink-900 font-semibold text-center flex items-center gap-6 animate-fadeIn">
+  
+  <!-- Ícone de coração com batida suave -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-pink-600 drop-shadow-md animate-heartbeat" fill="currentColor" viewBox="0 0 24 24" stroke="none" aria-hidden="true">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 
+    7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 
+    19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+  </svg>
+  
+  <!-- Texto do contador com brilho animado -->
+  <div class="flex flex-col text-left max-w-[calc(100%-64px)]">
+    <p class="mb-1 text-xl font-serif italic text-pink-800 leading-tight drop-shadow-sm">
+      Nosso amor floresce há 
+      <span id="tempoNamoro" class="font-extrabold text-pink-900 animate-glow"></span>.
+    </p>
+    <p class="text-pink-500 text-sm sm:text-base font-light tracking-wide leading-relaxed italic font-serif drop-shadow-sm text-justify">
+  Cada momento ao seu lado é uma nova página<br />
+  no lindo livro da nossa vida juntos.
+</p>
+
+  </div>
+  
+</div>
+
+<style>
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  .animate-fadeIn {
+    animation: fadeIn 1s ease forwards;
+  }
+
+  /* Batida suave do coração */
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+  }
+  .animate-heartbeat {
+    animation: heartbeat 2s infinite ease-in-out;
+    transform-origin: center;
+  }
+
+  /* Brilho suave no texto */
+  @keyframes glow {
+    0%, 100% {
+      text-shadow:
+        0 0 5px #db2777,
+        0 0 10px #f472b6,
+        0 0 20px #f9a8d4,
+        0 0 30px #f43f5e;
+    }
+    50% {
+      text-shadow:
+        0 0 10px #f43f5e,
+        0 0 15px #f9a8d4,
+        0 0 25px #f472b6,
+        0 0 40px #db2777;
+    }
+  }
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+</style>
+
+
+
+<script>
+  function calcularTempoNamoro() {
+    const dataInicio = new Date('2023-07-15T00:00:00');
+    const agora = new Date();
+
+    let diff = agora - dataInicio; // diferença em ms
+
+    const segundos = Math.floor(diff / 1000) % 60;
+    const minutos = Math.floor(diff / (1000 * 60)) % 60;
+    const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    
+    let anos = agora.getFullYear() - dataInicio.getFullYear();
+    let meses = agora.getMonth() - dataInicio.getMonth();
+    let dias = agora.getDate() - dataInicio.getDate();
+
+    if (dias < 0) {
+      meses--;
+      const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0);
+      dias += ultimoMes.getDate();
+    }
+    if (meses < 0) {
+      anos--;
+      meses += 12;
+    }
+
+    return `${anos} ano${anos !== 1 ? 's' : ''}, ${meses} mês${meses !== 1 ? 'es' : ''}, ${dias} dia${dias !== 1 ? 's' : ''}, ${horas.toString().padStart(2,'0')}h ${minutos.toString().padStart(2,'0')}m ${segundos.toString().padStart(2,'0')}s`;
+  }
+
+  function atualizarContador() {
+    document.getElementById('tempoNamoro').textContent = calcularTempoNamoro();
+  }
+
+  atualizarContador();
+  setInterval(atualizarContador, 1000);
+</script>
+
+
+<img 
+  src="img/foto5.png" 
+  alt="Foto do casal" 
+  class="mt-6 w-full max-w-md mx-auto rounded-3xl shadow-lg border-8 border-transparent bg-gradient-to-tr from-pink-300 via-pink-100 to-pink-300 p-1 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl" 
+/>
+
+<!-- Citação estilizada aprimorada -->
+<blockquote class="mt-8 max-w-xl mx-auto bg-pink-50 border-l-8 border-pink-400 p-6 rounded-xl shadow-md text-pink-800 font-serif italic text-lg leading-relaxed relative">
+  <svg class="w-8 h-8 text-pink-300 absolute -left-4 -top-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" >
+    <path d="M7.17 6.17a4 4 0 1 0-4 4v2a6 6 0 1 1 6-6h-2zm10 0a4 4 0 1 0-4 4v2a6 6 0 1 1 6-6h-2z"/>
+  </svg>
+  “Desde o dia em que te conheci, minha vida ganhou cor, brilho e sentido.<br />
+  Você é meu sonho realizado.”
+</blockquote>
+
+
+<!-- Caixa de mensagem especial -->
+<div class="mt-8 max-w-xl mx-auto p-6 rounded-3xl bg-gradient-to-br from-pink-100 via-pink-200 to-pink-300 border border-pink-300 shadow-md text-pink-900 font-semibold text-center relative">
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto mb-4 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>
+  💌 Maria Vitória, você é o meu presente mais precioso.<br />
+  Que nossa história seja eterna!
+</div>
+<div class="mt-12 w-full max-w-3xl mx-auto rounded-3xl shadow-2xl overflow-hidden bg-white relative">
+
+  <!-- Título elegante acima da imagem -->
+  <div class="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 bg-white bg-opacity-70 px-4 py-1.5 rounded-lg shadow-sm border border-pink-200">
+  <h2 class="text-pink-700 font-semibold text-sm italic text-center opacity-90">
+    Simplesmente a mulher mais bonita que já pisou nesta terra
+  </h2>
+</div>
+
+
+  <!-- Imagem única com legenda -->
+  <div class="flex flex-col items-center relative">
+    <img src="img/foto4.png" alt="Passeio juntos"
+      class="rounded-3xl shadow-xl object-cover w-full h-[420px] transition-transform duration-500 hover:scale-105" />
+    
+    <figcaption
+      class="absolute bottom-6 left-6 text-pink-700 bg-pink-100 bg-opacity-80 px-4 py-2 rounded-lg font-medium italic drop-shadow-md">
+      Minha Princesa
+    </figcaption>
+  </div>
+
+</div>
+
+ <!-- Botão carta -->
+<!-- Botão carta - estilo minimalista e moderno -->
+<!-- Botão para abrir a carta -->
+<button id="letterBtn" 
+    aria-pressed="false" 
+    aria-label="Abrir carta"
+    class="group relative flex items-center justify-center max-w-max mx-auto mt-10 px-10 py-3
+           bg-gradient-to-r from-pink-500 to-pink-700 text-white font-semibold text-lg font-sans tracking-wide rounded-xl
+           shadow-lg hover:from-pink-600 hover:to-pink-800 focus:outline-none focus:ring-4 focus:ring-pink-400 focus:ring-opacity-50
+           transition-transform duration-200 ease-in-out active:scale-95 select-none cursor-pointer"
+>
+  <!-- Ícone elegante à esquerda -->
+  <svg class="w-6 h-6 mr-3 stroke-current stroke-2 group-hover:stroke-white transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+  </svg>
+  Carta Do Seu Mocinho
+</button>
+
+<!-- Conteúdo da carta -->
+<div id="letterContent" aria-live="polite"
+     class="max-w-xl mx-auto mt-12 p-10 bg-gradient-to-br from-pink-50 to-pink-100
+            rounded-3xl shadow-xl border border-pink-200
+            text-pink-900 font-serif text-lg leading-relaxed whitespace-pre-wrap
+            ring-1 ring-pink-200 backdrop-blur-sm"
+     style="font-family: 'Georgia', serif;"
+>
+  <p class="mb-4">Oiiii neneco, feliz aniversário! 🎉</p>
+
+  <p class="mb-4">Se você está vendo essa cartinha, é porque hoje é seu dia. Já venho planejando isso há um tempo, junto com a caixinha que você vai receber junto com o site.</p>
+
+  <p class="mb-4">Bom, hoje é seu dia, né meu amor? Quero te agradecer por passar mais um ano ao meu lado. Você é simplesmente a mulher mais incrível deste mundo. Não sei até hoje como consegui uma namorada tão boa assim.</p>
+
+  <p class="mb-4">Você é a mulher dos meus sonhos e a mulher que eu quero levar para o resto da minha vida. Você foi a melhor coisa que já aconteceu na minha vida. Sou grato todos os dias por ter você, minha princesa.</p>
+
+  <p class="mb-4">Queria ter condições para te dar um presente melhor porque você merece muito mais, mas pode ter certeza que vou batalhar muito para sempre conseguir te dar o bom e o melhor, porque você merece isso e muito mais.</p>
+
+  <p class="mb-4">Não vejo a hora de te ver, minha princesa, te dar um beijo bem gostoso e um abração e aproveitar seu aniversário juntinhos.</p>
+
+  <p class="mb-4">Enfim, meu amor, acho que é isso. Muito obrigado por existir na minha vida e me fazer feliz todos os dias.</p>
+
+  <p class="mt-8 font-semibold italic text-pink-700 text-right select-none">Ass: do seu momozin 💖</p>
+</div>
+
+
+  </div>
+
+  <script>
+    letterBtn.addEventListener('click', () => {
+  const isShown = letterContent.classList.contains('show');
+  if (isShown) {
+    letterContent.classList.remove('show');
+    letterBtn.setAttribute('aria-pressed', 'false');
+  } else {
+    letterContent.classList.add('show');
+    letterBtn.setAttribute('aria-pressed', 'true');
+  }
+});
+
+  </script>
+
+</body>
+</html>
